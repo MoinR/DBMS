@@ -1,0 +1,66 @@
+/* Basic queries    
+   Error in reference to be resolved */
+CREATE TABLE Salespeople(
+	SNUM  NUMBER(10) PRIMARY KEY, 
+	SNAME VARCHAR(15), 
+	CITY  VARCHAR(15),
+	COMM  VARCHAR(15)
+); 
+
+CREATE TABLE Customer(
+	CNUM NUMBER(10) PRIMARY KEY, 
+	CNAME VARCHAR (15), 
+	CITY VARCHAR(20),
+	RATING NUMBER(10,2),
+	SNUM NUMBER(10), 
+	FOREIGN KEY (SNUM) REFERENCES Salespeople(SNUM)
+);
+CREATE TABLE orders(
+	ONUM NUMBER(10) PRIMARY KEY, 
+	AMOUNT  NUMBER(10,2), 
+	ODATE	DATE,
+	CNUM	NUMBER(10), 
+	SNUM 	NUMBER(10),
+	FOREIGN KEY (CNUM) REFERENCES Customer(CNUM),
+	FOREIGN KEY (SNUM) REFERENCES Salespeople(SNUM)
+); 
+
+/* Making sure that structure is correct */  
+DESC Salespeople; 
+DESC Customer; 
+DESC orders; 
+
+/*INITIAL ENTRIES FOR CUSTOMER */ 
+INSERT INTO CUSTOMER VALUES (2001, 'Hoffman', 'Rome',  100,1001);
+INSERT INTO CUSTOMER VALUES (2002, 'Glovanne', 'San Jose', 200,1003);
+INSERT INTO CUSTOMER VALUES (2003, 'Liu', 'Berlin', 300,1002);
+INSERT INTO CUSTOMER VALUES (2004, 'Grass', 'London', 100,1002);
+INSERT INTO CUSTOMER VALUES (2006, 'Clemens', 'Rome', 300,1007);
+INSERT INTO CUSTOMER VALUES (2007, 'Pereira', 'London', 100,  1004);
+
+/*INITIAL ENTRIES FOR SALESPEOPLE  */ 
+INSERT INTO Salespeople VALUES (1001,'Peel','London',0.12);
+INSERT INTO Salespeople VALUES (1002,'Serres','San Jose',0.13); 
+INSERT INTO Salespeople VALUES (1004,'Motika','London',0.11); 
+INSERT INTO Salespeople VALUES (1007,'Rifkin','Barcelona',0.15); 
+INSERT INTO Salespeople VALUES (1003,'Axelrod','New York',0.10);  
+
+/*INITIAL ENTRIES FOR  ORDERS  */ 
+INSERT INTO  orders VALUES (3001,18.69,'3-oct-16',2003,1007); 
+INSERT INTO  orders VALUES (3003,767.19,'3-oct-16',2001,1001); 
+INSERT INTO  orders VALUES (3002,	1800.1,	'3-oct-16',2002,1004); 
+INSERT INTO  orders VALUES (3005,	5160.45,'3-oct-16',	2003,1002); 
+INSERT INTO  orders VALUES (3006,1098.16,'3-oct-16',2003,1007); 
+INSERT INTO  orders VALUES (3009,1713.23,'4-oct-16',2002,1003); 
+INSERT INTO  orders VALUES (3007,75.75,'4-oct-16',	2004,1002); 
+INSERT INTO  orders VALUES (3008,4723,'5-oct-16',	2006,1001); 
+INSERT INTO  orders VALUES (3010,1309.95,'6-oct-16',2004,1002); 
+INSERT INTO  orders VALUES(3011,8891.78,'6-oct-16',	2006,1001); 
+
+
+/*MAKING SURE THAT VALUES ARE INSERTED */ 
+SELECT * FROM Customer; 
+SELECT * FROM Salespeople;
+SELECT * FROM orders; 
+
+/** Other queries you will find in Assignment-1/adhoc-1.sql	*/ 
